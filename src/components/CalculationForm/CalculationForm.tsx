@@ -201,7 +201,7 @@ export const CalculationForm: FC = () => {
               name={"salary"}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Ваша зарплата</FormLabel>
+                  <FormLabel>Ваш оклад</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
