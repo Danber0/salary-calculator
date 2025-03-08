@@ -8,7 +8,9 @@ export interface EmployeePaid {
 
 export interface SalaryDetails {
   firstPayment: number;
+  firstPaymentDay: number;
   secondPayment: number;
+  secondPaymentDay: number;
   totalSalary: number;
   salaryAfterTax: number;
   salaryBeforeTax: number;

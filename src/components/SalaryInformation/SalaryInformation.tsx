@@ -13,8 +13,14 @@ export const SalaryInformation: FC = () => {
     <div className={"flex justify-between items-start gap-7 p-10"}>
       <div className={"flex flex-col gap-2 flex-[50%]"}>
         <h1 className={"text-2xl font-bold"}>Расчет зарплаты</h1>
-        <InfoRow text={"Зарплата"} value={salaryDetails.firstPayment} />
-        <InfoRow text={"Аванс"} value={salaryDetails.secondPayment} />
+        <InfoRow
+          text={`Зарплата - ${salaryDetails.firstPaymentDay} числа`}
+          value={salaryDetails.firstPayment}
+        />
+        <InfoRow
+          text={`Аванс - ${salaryDetails.secondPaymentDay} числа`}
+          value={salaryDetails.secondPayment}
+        />
         <InfoRow text={"Итого"} value={salaryDetails.totalSalary} />
         <div className={"flex items-center justify-between"}>
           <h1 className={"text-2xl font-bold"}>Дополнительная информация</h1>

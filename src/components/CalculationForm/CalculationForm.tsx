@@ -43,7 +43,14 @@ export const CalculationForm: FC = () => {
   });
 
   const handleSubmit = async (data: FormData) => {
-    const { year, month, salary, includeTax } = data;
+    const {
+      year,
+      month,
+      salary,
+      includeTax,
+      firstPaymentDay,
+      secondPaymentDay,
+    } = data;
 
     const response = await getWorkingDays(+year, +month);
 
@@ -61,7 +68,9 @@ export const CalculationForm: FC = () => {
 
       setSalaryDetails({
         firstPayment,
+        firstPaymentDay,
         secondPayment,
+        secondPaymentDay,
         totalSalary,
         salaryAfterTax,
         salaryBeforeTax,

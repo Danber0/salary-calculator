@@ -18,7 +18,7 @@ export const InfoRow: FC<InfoRowProps> = ({ text, value, percent }) => {
         >
           {text}
         </dt>
-        <div className={"flex gap-5"}>
+        <div className={"flex items-center gap-2"}>
           <dd>
             <CountUp end={value} separator={" "} duration={1} /> ₽
           </dd>
