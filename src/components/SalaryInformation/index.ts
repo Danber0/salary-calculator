@@ -1,0 +1,1 @@
+export { SalaryInformation } from "./SalaryInformation";
