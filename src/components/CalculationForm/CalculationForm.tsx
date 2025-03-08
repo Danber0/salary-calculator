@@ -88,11 +88,13 @@ export const CalculationForm: FC = () => {
 
   return (
     <div className={"p-10 border-b-1"}>
-      <h1 className={"text-4xl font-bold mb-10"}>Калькулятор зарплаты</h1>
+      <h1 className={"text-3xl lg:text-4xl font-bold mb-10"}>
+        Калькулятор зарплаты
+      </h1>
       <Form {...form}>
         <div className={"flex flex-col gap-5"}>
-          <div className={"flex align-middle gap-2"}>
-            <div className={"flex-1"}>
+          <div className={"flex flex-wrap align-middle gap-2"}>
+            <div className={"grow-1 basis-[150px]"}>
               <FormField
                 control={form.control}
                 name={"year"}
@@ -120,7 +122,7 @@ export const CalculationForm: FC = () => {
                 )}
               />
             </div>
-            <div className={"flex-1"}>
+            <div className={"grow-1 basis-[150px]"}>
               <FormField
                 control={form.control}
                 name={"month"}
@@ -157,8 +159,8 @@ export const CalculationForm: FC = () => {
               />
             </div>
           </div>
-          <div className={"flex align-middle gap-2"}>
-            <div className={"flex flex-col gap-2 flex-1"}>
+          <div className={"flex flex-wrap align-middle gap-2"}>
+            <div className={"flex flex-col gap-2 grow-1"}>
               <FormField
                 control={form.control}
                 name={"firstPaymentDay"}
@@ -176,7 +178,7 @@ export const CalculationForm: FC = () => {
                 )}
               />
             </div>
-            <div className={"flex flex-col gap-2 flex-1"}>
+            <div className={"flex flex-col gap-2 grow-1"}>
               <FormField
                 control={form.control}
                 name={"secondPaymentDay"}
@@ -195,7 +197,7 @@ export const CalculationForm: FC = () => {
               />
             </div>
           </div>
-          <div className={"flex flex-col gap-2"}>
+          <div className={"flex flex-wrap flex-col gap-2"}>
             <FormField
               control={form.control}
               name={"salary"}

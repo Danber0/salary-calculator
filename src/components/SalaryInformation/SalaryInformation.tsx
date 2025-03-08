@@ -10,9 +10,9 @@ export const SalaryInformation: FC = () => {
   }
 
   return (
-    <div className={"flex justify-between items-start gap-7 p-10"}>
-      <div className={"flex flex-col gap-2 flex-[50%]"}>
-        <h1 className={"text-2xl font-bold"}>Расчет зарплаты</h1>
+    <div className={"flex flex-wrap justify-between items-start gap-7 p-10"}>
+      <div className={"flex flex-col gap-2 grow-1"}>
+        <h1 className={"text-xl lg:text-2xl font-bold"}>Расчет зарплаты</h1>
         <InfoRow
           text={`Зарплата - ${salaryDetails.firstPaymentDay} числа`}
           value={salaryDetails.firstPayment}
@@ -22,21 +22,21 @@ export const SalaryInformation: FC = () => {
           value={salaryDetails.secondPayment}
         />
         <InfoRow text={"Итого"} value={salaryDetails.totalSalary} />
-        <div className={"flex items-center justify-between"}>
-          <h1 className={"text-2xl font-bold"}>Дополнительная информация</h1>
-        </div>
+        <h1 className={"text-xl lg:text-2xl font-bold"}>Налоги</h1>
         <InfoRow
-          text={"Зарплата до вычета налога"}
+          text={"До вычета налога"}
           value={salaryDetails.salaryBeforeTax}
         />
         <InfoRow
-          text={"Зарплата после вычета налога"}
+          text={"После вычета налога"}
           value={salaryDetails.salaryAfterTax}
         />
         <InfoRow text={"Налог"} value={salaryDetails.taxAmount} />
       </div>
-      <div className={"flex flex-col gap-2 flex-[50%]"}>
-        <h1 className={"text-2xl font-bold"}>Отчисления работодателя</h1>
+      <div className={"flex flex-col gap-2 grow-1"}>
+        <h1 className={"text-xl lg:text-2xl font-bold"}>
+          Отчисления работодателя
+        </h1>
         <InfoRow
           text={"Пенсия"}
           value={salaryDetails.employeePaid.pension}
