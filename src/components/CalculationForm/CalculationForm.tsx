@@ -38,7 +38,7 @@ export const CalculationForm: FC = () => {
       salary: 205000,
       firstPaymentDay: 15,
       secondPaymentDay: 25,
-      includeTax: false,
+      isIncludeTax: false,
     },
   });
 
@@ -47,7 +47,7 @@ export const CalculationForm: FC = () => {
       year,
       month,
       salary,
-      includeTax,
+      isIncludeTax,
       firstPaymentDay,
       secondPaymentDay,
     } = data;
@@ -55,8 +55,8 @@ export const CalculationForm: FC = () => {
     const response = await getWorkingDays(+year, +month);
 
     const salaryTax = calculatePercentage(salary, 13);
-    const salaryAfterTax = includeTax ? salary : salary - salaryTax;
-    const salaryBeforeTax = includeTax ? salary / 0.87 : salary;
+    const salaryAfterTax = isIncludeTax ? salary : salary - salaryTax;
+    const salaryBeforeTax = isIncludeTax ? salary / 0.87 : salary;
 
     if ("response" in response.request) {
       const { firstPayment, secondPayment, totalSalary } = calculateSalary(
@@ -217,18 +217,18 @@ export const CalculationForm: FC = () => {
           </div>
           <FormField
             control={form.control}
-            name={"includeTax"}
+            name={"isIncludeTax"}
             defaultValue={false}
             render={({ field }) => (
               <FormItem>
                 <FormControl>
                   <div className={"flex align-middle gap-2"}>
                     <Checkbox
-                      id={"includeTax"}
+                      id={"isIncludeTax"}
                       onCheckedChange={field.onChange}
                       checked={field.value}
                     />
-                    <FormLabel htmlFor={"includeTax"}>
+                    <FormLabel htmlFor={"isIncludeTax"}>
                       Вместе с налогом НДФЛ(подоходный налог)
                     </FormLabel>
                   </div>

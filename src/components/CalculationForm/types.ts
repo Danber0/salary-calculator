@@ -6,7 +6,7 @@ export interface FormData {
   salary: number;
   firstPaymentDay: number;
   secondPaymentDay: number;
-  includeTax: boolean;
+  isIncludeTax: boolean;
 }
 
 export const formSchema = z.object({
@@ -15,5 +15,5 @@ export const formSchema = z.object({
   salary: z.coerce.number().min(1),
   firstPaymentDay: z.coerce.number().min(1).max(31),
   secondPaymentDay: z.coerce.number().min(1).max(31),
-  includeTax: z.boolean(),
+  isIncludeTax: z.boolean(),
 });
