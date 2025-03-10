@@ -1,18 +1,19 @@
 import { FC, useEffect } from "react";
-import {
-  calculatePercentage,
-  calculateSalary,
-  getWorkingDays,
-} from "@/components/CalculationForm/lib";
-import { FormData } from "./types";
-import { useSalary } from "@/lib/context";
-import { Button, Checkbox, Form, InputNumber, Select } from "antd";
 import { getYear } from "date-fns";
+import { Button, Checkbox, Form, InputNumber, Select } from "antd";
+
 import { Inline } from "@/components";
+
+import { calculatePercentage, calculateSalary, getWorkingDays } from "./lib";
 import { defaultSalaryDetails } from "@/lib/types";
+import { useSalary } from "@/lib/context";
+
+import { FormData } from "./types";
 
 export const CalculationForm: FC = () => {
   const [form] = Form.useForm<FormData>();
+
+  const { setSalaryDetails } = useSalary();
 
   useEffect(() => {
     const currentDate = new Date();
@@ -24,12 +25,10 @@ export const CalculationForm: FC = () => {
         salary: 205000,
         firstPaymentDay: 10,
         secondPaymentDay: 25,
-        isIncludeTax: true,
+        isIncludeTax: false,
       });
     }
-  }, [form]);
-
-  const { setSalaryDetails } = useSalary();
+  }, []);
 
   const handleSubmit = async (data: FormData) => {
     const {
@@ -77,15 +76,7 @@ export const CalculationForm: FC = () => {
 
   return (
     <div className={"p-10"}>
-      <h1 className={"text-3xl lg:text-4xl font-bold mb-10"}>
-        Калькулятор зарплаты
-      </h1>
-      <Form
-        form={form}
-        defaultValue={"1"}
-        onFinish={handleSubmit}
-        layout={"vertical"}
-      >
+      <Form form={form} onFinish={handleSubmit} layout={"vertical"}>
         <Inline>
           <Form.Item
             label={"Год"}
@@ -128,21 +119,17 @@ export const CalculationForm: FC = () => {
             rules={[
               { required: true, message: "Введите число" },
               {
-                type: "number",
-                min: 1,
-                max: 31,
-                message: "Введите число больше 1 и меньше 31",
-              },
-              {
                 type: "integer",
                 message: "Введите число без дроби",
               },
             ]}
           >
             <InputNumber
+              className={"w-full!"}
               type={"number"}
+              min={1}
+              max={31}
               placeholder={"Например, 10"}
-              style={{ width: "100%" }}
             />
           </Form.Item>
           <Form.Item
@@ -151,34 +138,30 @@ export const CalculationForm: FC = () => {
             rules={[
               { required: true, message: "Введите число" },
               {
-                type: "number",
-                min: 1,
-                max: 31,
-                message: "Введите число больше 1 и меньше 31",
-              },
-              {
                 type: "integer",
                 message: "Введите число без дроби",
               },
             ]}
           >
             <InputNumber
+              className={"w-full!"}
               type={"number"}
+              min={1}
+              max={31}
               placeholder={"Например, 25"}
-              style={{ width: "100%" }}
             />
           </Form.Item>
         </Inline>
         <Form.Item label={"Оклад"} name={"salary"} rules={[{ required: true }]}>
           <InputNumber
             className={"w-full!"}
+            placeholder={"Например, 250 000"}
             formatter={(value) =>
               `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, " ")
             }
-            placeholder={"Например, 250000"}
           />
         </Form.Item>
-        <Form.Item name={"isIncludeTax"}>
+        <Form.Item name={"isIncludeTax"} valuePropName={"checked"}>
           <Checkbox>Вместе с налогом НДФЛ(подоходный налог)</Checkbox>
         </Form.Item>
         <div className={"flex items-center gap-3"}>
