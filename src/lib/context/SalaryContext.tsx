@@ -1,5 +1,5 @@
 import { createContext, FC, ReactNode, useContext, useState } from "react";
-import { SalaryDetails } from "../types.ts";
+import { defaultSalaryDetails, SalaryDetails } from "../types";
 
 interface SalaryContextProps {
   salaryDetails: SalaryDetails;
@@ -17,21 +17,8 @@ const SalaryContext = createContext<SalaryContextProps>(
 export const SalaryProvider: FC<SalaryContextProviderProps> = ({
   children,
 }) => {
-  const [salaryDetails, setSalaryDetails] = useState<SalaryDetails>({
-    firstPayment: 0,
-    secondPayment: 0,
-    totalSalary: 0,
-    salaryAfterTax: 0,
-    salaryBeforeTax: 0,
-    taxAmount: 0,
-    employeePaid: {
-      pension: 0,
-      medical: 0,
-      sickDays: 0,
-      injury: 0,
-      total: 0,
-    },
-  } as SalaryDetails);
+  const [salaryDetails, setSalaryDetails] =
+    useState<SalaryDetails>(defaultSalaryDetails);
 
   return (
     <SalaryContext.Provider

@@ -1,19 +1,8 @@
-import { z } from "zod";
-
 export interface FormData {
-  month: string;
-  year: string;
+  month: number;
+  year: number;
   salary: number;
   firstPaymentDay: number;
   secondPaymentDay: number;
   isIncludeTax: boolean;
 }
-
-export const formSchema = z.object({
-  month: z.string(),
-  year: z.string(),
-  salary: z.coerce.number().min(1),
-  firstPaymentDay: z.coerce.number().min(1).max(31),
-  secondPaymentDay: z.coerce.number().min(1).max(31),
-  isIncludeTax: z.boolean(),
-});

@@ -3,11 +3,21 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import { App } from "./App";
 import { SalaryProvider } from "@/lib/context";
+import { ConfigProvider } from "antd";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <SalaryProvider>
-      <App />
-    </SalaryProvider>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: "#4B76EEFF",
+          fontFamily: "Nunito, sans-serif",
+        },
+      }}
+    >
+      <SalaryProvider>
+        <App />
+      </SalaryProvider>
+    </ConfigProvider>
   </StrictMode>,
 );

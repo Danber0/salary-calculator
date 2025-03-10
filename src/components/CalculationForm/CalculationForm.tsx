@@ -1,46 +1,31 @@
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-} from "@/components/ui/form.tsx";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select.tsx";
-import { getYear } from "date-fns";
-import { Input } from "@/components/ui/input.tsx";
-import { Checkbox } from "@/components/ui/checkbox.tsx";
-import { Button } from "@/components/ui/button.tsx";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import {
   calculatePercentage,
   calculateSalary,
   getWorkingDays,
 } from "@/components/CalculationForm/lib";
-import { FormData, formSchema } from "./types";
+import { FormData } from "./types";
 import { useSalary } from "@/lib/context";
+import { Button, Checkbox, Form, InputNumber, Select } from "antd";
+import { getYear } from "date-fns";
+import { Inline } from "@/components";
+import { defaultSalaryDetails } from "@/lib/types";
 
 export const CalculationForm: FC = () => {
-  const { setSalaryDetails } = useSalary();
+  const [form] = Form.useForm<FormData>();
 
-  const form = useForm<FormData>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      month: "02",
-      year: getYear(new Date()).toString(),
+  useEffect(() => {
+    form.setFieldsValue({
+      year: 2025,
+      month: 1,
       salary: 205000,
-      firstPaymentDay: 15,
+      firstPaymentDay: 10,
       secondPaymentDay: 25,
-      isIncludeTax: false,
-    },
-  });
+      isIncludeTax: true,
+    });
+  }, [form]);
+
+  const { setSalaryDetails } = useSalary();
 
   const handleSubmit = async (data: FormData) => {
     const {
@@ -87,157 +72,124 @@ export const CalculationForm: FC = () => {
   };
 
   return (
-    <div className={"p-10 border-b-1"}>
+    <div className={"p-10"}>
       <h1 className={"text-3xl lg:text-4xl font-bold mb-10"}>
         Калькулятор зарплаты
       </h1>
-      <Form {...form}>
-        <div className={"flex flex-col gap-5"}>
-          <div className={"flex flex-wrap align-middle gap-2"}>
-            <div className={"grow-1 basis-[150px]"}>
-              <FormField
-                control={form.control}
-                name={"year"}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Выберете год</FormLabel>
-                    <FormControl>
-                      <Select
-                        {...field}
-                        onValueChange={field.onChange}
-                        value={field.value}
-                      >
-                        <SelectTrigger>
-                          <SelectValue
-                            placeholder={`Например, ${getYear(new Date())}`}
-                          />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="2024">2024</SelectItem>
-                          <SelectItem value="2025">2025</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-            </div>
-            <div className={"grow-1 basis-[150px]"}>
-              <FormField
-                control={form.control}
-                name={"month"}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Выберете месяц</FormLabel>
-                    <FormControl>
-                      <Select
-                        {...field}
-                        onValueChange={field.onChange}
-                        value={field.value}
-                      >
-                        <SelectTrigger>
-                          <SelectValue placeholder="Например, Январь" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="01">Январь</SelectItem>
-                          <SelectItem value="02">Февраль</SelectItem>
-                          <SelectItem value="03">Март</SelectItem>
-                          <SelectItem value="04">Апрель</SelectItem>
-                          <SelectItem value="05">Май</SelectItem>
-                          <SelectItem value="06">Июнь</SelectItem>
-                          <SelectItem value="07">Июль</SelectItem>
-                          <SelectItem value="08">Август</SelectItem>
-                          <SelectItem value="09">Сентябрь</SelectItem>
-                          <SelectItem value="10">Октябрь</SelectItem>
-                          <SelectItem value="11">Ноябрь</SelectItem>
-                          <SelectItem value="12">Декабрь</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-            </div>
-          </div>
-          <div className={"flex flex-wrap align-middle gap-2"}>
-            <div className={"flex flex-col gap-2 grow-1"}>
-              <FormField
-                control={form.control}
-                name={"firstPaymentDay"}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Дата получения зарплаты</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        type={"number"}
-                        placeholder={"Например, 10"}
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-            </div>
-            <div className={"flex flex-col gap-2 grow-1"}>
-              <FormField
-                control={form.control}
-                name={"secondPaymentDay"}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Дата получения аванса</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        type={"number"}
-                        placeholder={"Например, 25"}
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-            </div>
-          </div>
-          <div className={"flex flex-wrap flex-col gap-2"}>
-            <FormField
-              control={form.control}
-              name={"salary"}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Ваш оклад</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      type={"number"}
-                      placeholder={"Например, 250000"}
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
+      <Form
+        form={form}
+        defaultValue={"1"}
+        onFinish={handleSubmit}
+        layout={"vertical"}
+      >
+        <Inline>
+          <Form.Item
+            label={"Год"}
+            name={"year"}
+            rules={[{ required: true, message: "Выберите год" }]}
+          >
+            <Select
+              options={[{ value: 2024 }, { value: 2025 }]}
+              placeholder={`Например, ${getYear(new Date())}`}
             />
-          </div>
-          <FormField
-            control={form.control}
-            name={"isIncludeTax"}
-            defaultValue={false}
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <div className={"flex align-middle gap-2"}>
-                    <Checkbox
-                      id={"isIncludeTax"}
-                      onCheckedChange={field.onChange}
-                      checked={field.value}
-                    />
-                    <FormLabel htmlFor={"isIncludeTax"}>
-                      Вместе с налогом НДФЛ(подоходный налог)
-                    </FormLabel>
-                  </div>
-                </FormControl>
-              </FormItem>
-            )}
+          </Form.Item>
+          <Form.Item
+            label={"Месяц"}
+            name={"month"}
+            rules={[{ required: true, message: "Выберите месяц" }]}
+          >
+            <Select
+              placeholder={"Например, Январь"}
+              options={[
+                { value: 1, label: "Январь" },
+                { value: 2, label: "Февраль" },
+                { value: 3, label: "Март" },
+                { value: 4, label: "Апрель" },
+                { value: 5, label: "Май" },
+                { value: 6, label: "Июнь" },
+                { value: 7, label: "Июль" },
+                { value: 8, label: "Август" },
+                { value: 9, label: "Сентябрь" },
+                { value: 10, label: "Октябрь" },
+                { value: 11, label: "Ноябрь" },
+                { value: 12, label: "Декабрь" },
+              ]}
+            />
+          </Form.Item>
+        </Inline>
+        <Inline>
+          <Form.Item
+            label={"Дата получения зарплаты"}
+            name={"firstPaymentDay"}
+            rules={[
+              { required: true, message: "Введите число" },
+              {
+                type: "number",
+                min: 1,
+                max: 31,
+                message: "Введите число больше 1 и меньше 31",
+              },
+              {
+                type: "integer",
+                message: "Введите число без дроби",
+              },
+            ]}
+          >
+            <InputNumber
+              type={"number"}
+              placeholder={"Например, 10"}
+              style={{ width: "100%" }}
+            />
+          </Form.Item>
+          <Form.Item
+            label={"Дата получения аванса"}
+            name={"secondPaymentDay"}
+            rules={[
+              { required: true, message: "Введите число" },
+              {
+                type: "number",
+                min: 1,
+                max: 31,
+                message: "Введите число больше 1 и меньше 31",
+              },
+              {
+                type: "integer",
+                message: "Введите число без дроби",
+              },
+            ]}
+          >
+            <InputNumber
+              type={"number"}
+              placeholder={"Например, 25"}
+              style={{ width: "100%" }}
+            />
+          </Form.Item>
+        </Inline>
+        <Form.Item label={"Оклад"} name={"salary"} rules={[{ required: true }]}>
+          <InputNumber
+            className={"w-full!"}
+            formatter={(value) =>
+              `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+            }
+            placeholder={"Например, 250000"}
           />
-          <Button className={"w-fit"} onClick={form.handleSubmit(handleSubmit)}>
+        </Form.Item>
+        <Form.Item name={"isIncludeTax"}>
+          <Checkbox>Вместе с налогом НДФЛ(подоходный налог)</Checkbox>
+        </Form.Item>
+        <div className={"flex items-center gap-3"}>
+          <Button type={"primary"} htmlType={"submit"}>
             Рассчитать зарплату
+          </Button>
+          <Button
+            color={"danger"}
+            type={"default"}
+            onClick={() => {
+              form.resetFields();
+              setSalaryDetails(defaultSalaryDetails);
+            }}
+          >
+            Очистить форму
           </Button>
         </div>
       </Form>
