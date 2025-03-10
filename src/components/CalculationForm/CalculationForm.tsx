@@ -15,14 +15,18 @@ export const CalculationForm: FC = () => {
   const [form] = Form.useForm<FormData>();
 
   useEffect(() => {
-    form.setFieldsValue({
-      year: 2025,
-      month: 1,
-      salary: 205000,
-      firstPaymentDay: 10,
-      secondPaymentDay: 25,
-      isIncludeTax: true,
-    });
+    const currentDate = new Date();
+
+    if (import.meta.env.DEV) {
+      form.setFieldsValue({
+        year: currentDate.getFullYear(),
+        month: currentDate.getMonth() + 1,
+        salary: 205000,
+        firstPaymentDay: 10,
+        secondPaymentDay: 25,
+        isIncludeTax: true,
+      });
+    }
   }, [form]);
 
   const { setSalaryDetails } = useSalary();
