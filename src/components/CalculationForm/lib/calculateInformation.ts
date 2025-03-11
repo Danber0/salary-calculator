@@ -1,24 +1,26 @@
 import { getDaysInMonth } from "date-fns";
 import { getWorkingDaysInMonth } from "./getWorkingDaysInMonth";
-import { getWorkingDays } from "./getWorkingDays.ts";
-import { calculatePercentage } from "./calculatePercentage.ts";
+import { getWorkingDays } from "./getWorkingDays";
+import { calculatePercentage } from "./calculatePercentage";
+import { calculateSalary } from "./calculateSalary";
 import { FormData } from "@/lib/types";
 
 export const calculateInformation = async ({
   year,
   month,
   salary,
+  isIncludeTax,
   firstPaymentDay,
   secondPaymentDay,
-  isIncludeTax,
 }: FormData) => {
   const response = await getWorkingDays(+year, +month);
 
   const str = response.request.response as string;
 
-  const salaryTax = calculatePercentage(salary, 13);
-  const salaryAfterTax = isIncludeTax ? salary : salary - salaryTax;
-  const salaryBeforeTax = isIncludeTax ? salary / 0.87 : salary;
+  const { salaryAfterTax, salaryBeforeTax, taxAmount } = calculateSalary(
+    salary,
+    isIncludeTax,
+  );
 
   const prevMonthDays = getDaysInMonth(new Date(year, month - 2));
 
@@ -51,7 +53,7 @@ export const calculateInformation = async ({
     totalSalary: firstPayment + secondPayment,
     salaryAfterTax,
     salaryBeforeTax,
-    taxAmount: salaryBeforeTax - salaryAfterTax,
+    taxAmount,
     employeePaid: {
       pension: calculatePercentage(salaryBeforeTax, 22),
       medical: calculatePercentage(salaryBeforeTax, 5.1),
