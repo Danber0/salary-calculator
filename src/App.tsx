@@ -66,7 +66,7 @@ export const App = () => {
               },
             ]}
           />
-          <div className={"flex items-center gap-3"}>
+          <div className={"flex items-center gap-3 mb-5"}>
             <Button type={"primary"} htmlType={"submit"}>
               Рассчитать зарплату
             </Button>
