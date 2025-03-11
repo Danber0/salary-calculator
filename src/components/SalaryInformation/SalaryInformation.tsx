@@ -10,7 +10,7 @@ export const SalaryInformation: FC = () => {
   }
 
   return (
-    <div className={"flex flex-wrap justify-between items-start gap-7 p-10"}>
+    <div className={"flex flex-wrap justify-between items-start gap-7"}>
       <div className={"flex flex-col gap-2 grow-1"}>
         <h1 className={"text-xl lg:text-2xl font-bold"}>Расчет зарплаты</h1>
         <InfoRow

@@ -1,3 +1,14 @@
+export interface FormData {
+  month: number;
+  year: number;
+  salary: number;
+  firstPaymentDay: number;
+  secondPaymentDay: number;
+  isIncludeTax: boolean;
+  secondPaymentFixed: number;
+  isSecondPaymentPercent: boolean;
+}
+
 export interface EmployeePaid {
   pension: number;
   medical: number;

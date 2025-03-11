@@ -9,6 +9,11 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ConfigProvider
       theme={{
+        components: {
+          Collapse: {
+            paddingLG: 0,
+          },
+        },
         token: {
           colorPrimary: "#4B76EEFF",
           fontFamily: "Nunito, sans-serif",
