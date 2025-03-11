@@ -22,6 +22,7 @@ export const AdditionalConditions = () => {
           addonBefore={
             <Form.Item noStyle name={"secondPaymentFixedType"}>
               <Select
+                defaultValue={"fixed"}
                 options={[
                   { value: "fixed", label: "₽" },
                   { value: "percent", label: "%" },
