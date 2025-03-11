@@ -12,7 +12,7 @@ import {
   AdditionalConditions,
 } from "@/components";
 
-import { calculateInformation } from "@/components/CalculationForm/lib";
+import { calculateSalaryInformation } from "@/components/CalculationForm/lib";
 
 import "@ant-design/v5-patch-for-react-19";
 
@@ -37,7 +37,7 @@ export const App = () => {
   }, []);
 
   const handleSubmit = async (data: FormData) => {
-    const calculatedData = await calculateInformation(data);
+    const calculatedData = await calculateSalaryInformation(data);
 
     setSalaryDetails(calculatedData);
   };
