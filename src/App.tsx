@@ -14,7 +14,7 @@ import { calculateSalary } from "@/components/CalculationForm/lib";
 import "@ant-design/v5-patch-for-react-19";
 
 export const App = () => {
-  const [form] = Form.useForm();
+  const [form] = Form.useForm<FormData>();
   const { setSalaryDetails } = useSalary();
 
   useEffect(() => {
@@ -28,6 +28,7 @@ export const App = () => {
         firstPaymentDay: 10,
         secondPaymentDay: 25,
         isIncludeTax: false,
+        secondPaymentFixedType: "fixed",
       });
     }
   }, []);

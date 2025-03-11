@@ -1,3 +1,5 @@
+export type FixedType = "fixed" | "percent";
+
 export interface FormData {
   month: number;
   year: number;
@@ -6,7 +8,7 @@ export interface FormData {
   secondPaymentDay: number;
   isIncludeTax: boolean;
   secondPaymentFixed: number;
-  isSecondPaymentPercent: boolean;
+  secondPaymentFixedType: FixedType;
 }
 
 export interface EmployeePaid {
