@@ -4,12 +4,15 @@ import { Button, Collapse, Form, Space } from "antd";
 import { useSalary } from "@/lib/context";
 import { defaultSalaryDetails, FormData } from "@/lib/types";
 
-import { Header } from "@/components/Header";
-import { CalculationForm } from "@/components/CalculationForm";
-import { Wrapper } from "@/components/Wrapper/Wrapper.tsx";
-import { SalaryInformation } from "@/components/SalaryInformation";
-import { AdditionalConditions } from "@/components";
-import { calculateSalary } from "@/components/CalculationForm/lib";
+import {
+  Header,
+  SalaryInformation,
+  CalculationForm,
+  Wrapper,
+  AdditionalConditions,
+} from "@/components";
+
+import { calculateInformation } from "@/components/CalculationForm/lib";
 
 import "@ant-design/v5-patch-for-react-19";
 
@@ -34,7 +37,7 @@ export const App = () => {
   }, []);
 
   const handleSubmit = async (data: FormData) => {
-    const calculatedData = await calculateSalary(data);
+    const calculatedData = await calculateInformation(data);
 
     setSalaryDetails(calculatedData);
   };

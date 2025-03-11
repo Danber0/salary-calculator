@@ -1,10 +1,10 @@
 import { getDaysInMonth } from "date-fns";
 import { getWorkingDaysInMonth } from "./getWorkingDaysInMonth";
-import { getWorkingDays } from "@/components/CalculationForm/lib/getWorkingDays.ts";
-import { calculatePercentage } from "@/components/CalculationForm/lib/calculatePercentage.ts";
+import { getWorkingDays } from "./getWorkingDays.ts";
+import { calculatePercentage } from "./calculatePercentage.ts";
 import { FormData } from "@/lib/types";
 
-export const calculateSalary = async ({
+export const calculateInformation = async ({
   year,
   month,
   salary,
@@ -14,7 +14,7 @@ export const calculateSalary = async ({
 }: FormData) => {
   const response = await getWorkingDays(+year, +month);
 
-  const str: string = response.request.response;
+  const str = response.request.response as string;
 
   const salaryTax = calculatePercentage(salary, 13);
   const salaryAfterTax = isIncludeTax ? salary : salary - salaryTax;
