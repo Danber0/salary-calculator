@@ -51,7 +51,7 @@ export const App = () => {
         layout={"vertical"}
         variant={"filled"}
       >
-        <Space direction={"vertical"} className={"w-full p-8"} size={"large"}>
+        <Space direction={"vertical"} className={"w-full p-8"} size={"small"}>
           <h1 className={"text-3xl font-bold"}>Умный калькулятор зарплаты</h1>
           <CalculationForm />
           <Collapse
