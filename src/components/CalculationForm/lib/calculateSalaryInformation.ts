@@ -84,6 +84,7 @@ const calculateEmployerContributions = (salaryBeforeTax: number) => {
  */
 const fetchWorkingDays = async (year: number, month: number) => {
   const response = await getWorkingDays(year, month);
+
   return response.request.response as string;
 };
 
