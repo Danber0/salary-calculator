@@ -13,7 +13,7 @@ export const InfoRow: FC<InfoRowProps> = ({ text, value, percent }) => {
       <div className={"flex items-center justify-between"}>
         <dt
           className={
-            "flex text-1 lg:text-xl flex-1 items-baseline grow-1 whitespace-nowrap after:content-[''] after:grow-1 after:mx-2 after:border-b-2 after:border-dashed after:border-border"
+            "flex text-1 lg:text-xl flex-1 items-baseline grow-1 whitespace-nowrap after:border-[#c6c6c6] after:content-[''] after:grow-1 after:mx-2 after:border-b-2 after:border-dashed after:border-border"
           }
         >
           {text}
