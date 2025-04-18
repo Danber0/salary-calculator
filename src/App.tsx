@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Button, Collapse, Form, Space } from "antd";
+import { Button, Form, Space } from "antd";
 
 import { useSalary } from "@/lib/context";
 import { defaultSalaryDetails, FormData } from "@/lib/types";
@@ -9,7 +9,6 @@ import {
   SalaryInformation,
   CalculationForm,
   Wrapper,
-  AdditionalConditions,
 } from "@/components";
 
 import { calculateSalaryInformation } from "@/components/CalculationForm/lib";
@@ -54,18 +53,19 @@ export const App = () => {
         <Space direction={"vertical"} className={"w-full p-8"} size={"small"}>
           <h1 className={"text-3xl font-bold"}>Умный калькулятор зарплаты</h1>
           <CalculationForm />
-          <Collapse
-            ghost
-            destroyInactivePanel
-            size={"large"}
-            items={[
-              {
-                key: "1",
-                label: "Дополнительные условия",
-                children: <AdditionalConditions />,
-              },
-            ]}
-          />
+          {/*TODO: Добавить дополнительные условия*/}
+          {/*<Collapse*/}
+          {/*  ghost*/}
+          {/*  destroyInactivePanel*/}
+          {/*  size={"large"}*/}
+          {/*  items={[*/}
+          {/*    {*/}
+          {/*      key: "1",*/}
+          {/*      label: "Дополнительные условия",*/}
+          {/*      children: <AdditionalConditions />,*/}
+          {/*    },*/}
+          {/*  ]}*/}
+          {/*/>*/}
           <div className={"flex items-center gap-3 mb-5"}>
             <Button type={"primary"} htmlType={"submit"}>
               Рассчитать зарплату

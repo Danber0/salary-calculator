@@ -14,11 +14,19 @@ export const SalaryInformation: FC = () => {
       <div className={"flex flex-col gap-2 grow-1"}>
         <h1 className={"text-xl lg:text-2xl font-bold"}>Расчет зарплаты</h1>
         <InfoRow
-          text={`Зарплата - ${salaryDetails.firstPaymentDay} числа`}
+          text={`Зарплата${
+            salaryDetails.firstPaymentDay
+              ? ` - ${salaryDetails.firstPaymentDay} числа`
+              : ""
+          }`}
           value={salaryDetails.firstPayment}
         />
         <InfoRow
-          text={`Аванс - ${salaryDetails.secondPaymentDay} числа`}
+          text={`Аванс ${
+            salaryDetails.secondPaymentDay
+              ? ` - ${salaryDetails.secondPaymentDay} числа`
+              : ""
+          }`}
           value={salaryDetails.secondPayment}
         />
         <InfoRow text={"Итого"} value={salaryDetails.totalSalary} />

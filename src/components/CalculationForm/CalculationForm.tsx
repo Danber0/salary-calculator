@@ -47,7 +47,6 @@ export const CalculationForm: FC = () => {
           label={"Дата получения зарплаты"}
           name={"firstPaymentDay"}
           rules={[
-            { required: true, message: "Введите число" },
             {
               type: "integer",
               message: "Введите число без дроби",
@@ -66,7 +65,6 @@ export const CalculationForm: FC = () => {
           label={"Дата получения аванса"}
           name={"secondPaymentDay"}
           rules={[
-            { required: true, message: "Введите число" },
             {
               type: "integer",
               message: "Введите число без дроби",
